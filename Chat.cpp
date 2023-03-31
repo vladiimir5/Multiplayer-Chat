@@ -68,7 +68,7 @@ void Chat::signUp()
 	if (getUserByLogin(login) || login == "all") { throw UserLoginExp(); }
 
 	User user = User(login, password, name);
-	Users_.push_back(user);
+	Users_.emplace_back(user);
 	currentUser_ = std::make_shared<User>(user);
 }
 
@@ -212,6 +212,6 @@ void Chat::addMessage()
 		return;
 	}
 
-	if (to == "all") { Messages_.push_back(Message{ currentUser_->getUserLogin(), "all", text }); }
-	else { Messages_.push_back(Message{ currentUser_->getUserLogin(), getUserByName(to)->getUserLogin(), text }); }
+	if (to == "all") { Messages_.emplace_back(Message{ currentUser_->getUserLogin(), "all", text }); }
+	else { Messages_.emplace_back(Message{ currentUser_->getUserLogin(), getUserByName(to)->getUserLogin(), text }); }
 }
